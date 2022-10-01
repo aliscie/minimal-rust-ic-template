@@ -1,0 +1,21 @@
+start_block_chain_simulation:
+	dfx start
+
+install_packages:
+	yarn install
+
+update_node:
+	# make sure to update t node for node 16
+	# for mac
+	brew upgrade node
+
+update_webpack:
+	# make sure to
+	npm update webpack
+
+deploy:
+	dfx deploy
+
+yarn_start:
+	yarn start
+
