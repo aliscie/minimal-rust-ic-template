@@ -1,5 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
+const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -49,7 +51,7 @@ module.exports = {
     entry: {
         // The frontend.entrypoint points to the HTML file for this build, so we need
         // to replace the extension to `.js`.
-         index: path.join(__dirname, asset_entry).replace(/\.html$/, ".js"),
+        index: path.join(__dirname, asset_entry).replace(/\.html$/, ".js"),
     },
     devtool: isDevelopment ? "source-map" : false,
     optimization: {
@@ -103,6 +105,10 @@ module.exports = {
             Buffer: [require.resolve("buffer/"), "Buffer"],
             process: require.resolve("process/browser"),
         }),
+        new WasmPackPlugin({
+            crateDirectory: "./",
+            extraArgs: "--no-typescript",
+        })
     ],
     // proxy /api to port 8000 during development
     devServer: {
