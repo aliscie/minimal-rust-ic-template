@@ -1,4 +1,4 @@
-import { autodox } from "../../declarations/autodox";
+import { autodox } from "../declarations/autodox";
 
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
